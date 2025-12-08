@@ -1,0 +1,11 @@
+<%-include('./partials/head.ejs')%>
+<%-include('./partials/navbar.ejs')%>
+
+<h1>All the cats</h1>
+<p><%= cats.map((c)=>   `Hi: ${c}`) %></p>
+<ul>
+    <% for(let cat of cats){ %>
+        <li><%= cat %></li>
+    <% } %>
+</ul>
+<%-include('./partials/footer.ejs')%>

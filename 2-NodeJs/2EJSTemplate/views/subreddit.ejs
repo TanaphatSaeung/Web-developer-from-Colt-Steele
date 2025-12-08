@@ -1,0 +1,23 @@
+<%-include('./partials/head.ejs')%>
+<%-include('./partials/navbar.ejs')%>
+
+
+  <h1>Browsing The <%= subreddit%> subreddit</h1>
+
+  <% if( dato ){ %>
+  <h2>name: <%= dato.name %></h2>
+  <p>subscribers: <%= dato.subscribers %></p>
+  <p>description: <%= dato.description %></p>
+  <hr />
+  <% for(let post of dato.posts){ %>
+  <article>
+    <p><%= post.title %> - <b><%= post.author %></b></p>
+    <% if(post.img){ %>
+    <img src="<%= post.img %>" alt="img" />
+    <% }%>
+  </article>
+  <% } %> <% } else {%>
+  <h2>Nothing Here</h2>
+  <% }%>
+
+<%-include('./partials/footer.ejs')%>

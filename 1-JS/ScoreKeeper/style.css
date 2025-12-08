@@ -1,0 +1,123 @@
+:root{
+    --shadow: 0px 0px 4px rgba(0,0,0,0.2);
+}
+
+body{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    font-family: "Kanit", sans-serif;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    max-width: 30%;
+    justify-content: center;
+    margin-top: 50px;
+}
+.containerImg{
+    border: 1 solid black;
+}
+.descripeHeader{
+    border: none;
+    box-shadow: var(--shadow);
+    padding: 10px;
+    margin-top: 0px;
+    margin-bottom: 3px;
+}
+.scoreContainer{
+    border: none;
+    box-shadow: var(--shadow);
+    padding: 20px;
+}
+.scoreDisplay{
+    display: flex;
+    font-size: 35px;
+    font-weight: 500;
+}
+span{
+    padding: 0px 10px;
+}
+.descripeScore{
+    font-size: 15px;
+    margin-top: 2px;
+}
+.choosing{
+    display: flex;
+}
+.choosing p{
+    font-weight: bold;
+    margin: 3px;
+    padding-right: 10px;
+}
+#selectWinner{
+    padding: 0px 7px;
+    border: 1 solid;
+    border-color: #d7d7d7;
+    border-radius: 10px;
+    background-color: rgba(0,0,0,0);
+    transition: background-color 0.25s ease;
+}
+#selectWinner:hover{
+    background-color: rgba(0,0,0,0.05);
+}
+#selectWinner:active{
+    background-color: rgba(0,0,0,0.7);
+}
+#selectWinner:focus{
+    outline: none;
+}
+.btn{
+    display: flex;
+}
+.btnPlay{
+    width: 100%;
+    padding: 10px 0px;
+    color: #fff;
+    border-radius: 3px;
+    border: none;
+}
+.green{
+    background-color: rgb(8, 187, 127);
+    transition: all 0.25s ease;
+}
+.green:hover{
+    opacity: 0.8;
+}
+.green:active{
+    opacity: 0.6;
+}
+.blue{
+    background-color: rgb(6, 155, 219);
+    transition: all 0.25s ease;
+}
+.blue:hover{
+    opacity: 0.8;
+}
+.blue:active{
+    opacity: 0.6;
+}
+.red{
+    background-color: rgb(254, 64, 111);
+    transition: all 0.25s ease;
+}
+.red:hover{
+    opacity: 0.8;
+}
+.red:active{
+    opacity: 0.6;
+}
+
+.greenScore{
+    color: rgb(8, 187, 127);
+}
+.redScore{
+    color: rgb(254, 64, 111);
+}
+.disabledBTN{
+    opacity: 0.6;
+}
+

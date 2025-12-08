@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "color": "^5.0.2",
+    "colors": "^1.4.0",
+    "give-me-a-joke": "^0.5.1"
+  }
+}

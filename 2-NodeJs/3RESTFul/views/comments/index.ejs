@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comment index</title>
+</head>
+<body>
+    <h1>Comments</h1>
+    <ul>
+        <% for (let com of comments){ %>
+        <li><%= com.comment %> - <b><%= com.username %></b> <a href='/comments/<%=com.id%>'>details</a> </li> 
+        <% } %>
+    </ul>
+    <a href="/comments/new">create new comment</a>
+</body>
+</html>

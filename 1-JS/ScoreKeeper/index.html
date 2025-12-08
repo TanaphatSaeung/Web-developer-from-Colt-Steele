@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Score Keeper</title>
+</head>
+<body>
+    <div class="container">
+        <img class="containerImg" src="https://media.istockphoto.com/id/1425158165/photo/table-tennis-ping-pong-paddles-and-white-ball-on-blue-board.jpg?s=612x612&w=0&k=20&c=KSdi4bEGoxdhaGMnl6CZaqTLbKbobArgrrpLem3oN98=" alt="">
+        <p class="descripeHeader">
+            Ping Pong Score Keeper
+        </p>
+        <div class="scoreContainer">
+            <div class="scoreDisplay">
+                <div class="scorePlayerOne"></div>
+                <span>to</span>
+                <div class="scorePlayerTwo"></div>
+            </div>
+            <p class="descripeScore">
+                Use the buttons below to keep score.
+            </p>
+            <form action="/reset" class="choosing">
+                <p>Playing To</p>
+                <select id="selectWinner">
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7" selected>7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+            </form>
+        </div>
+        <form action="/adding" class="btn">
+            <button class="btnPlay green">+1 Player One</button>
+            <button class="btnPlay blue">+1 Player Two</button>
+            <button class="btnPlay red">Reset</button>
+        </form>
+    </div>
+
+
+    <script src="script.js"></script>
+</body>
+</html>

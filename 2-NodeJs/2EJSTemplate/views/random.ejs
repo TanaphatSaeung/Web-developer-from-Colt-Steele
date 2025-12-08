@@ -1,0 +1,10 @@
+<%-include('./partials/head.ejs')%>
+<%-include('./partials/navbar.ejs')%>
+
+<h1>title</h1>
+<% if (rand % 2 === 0 ) { %>
+<h2>That's even number! : '<%= rand %>'</h2>
+<% } else {%>
+<h2>That's odd number! : '<%= rand %>'</h2>
+<% } %>
+<%-include('./partials/footer.ejs')%>
