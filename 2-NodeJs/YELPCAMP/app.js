@@ -1,6 +1,7 @@
 const express = require('express')
 const path = require('node:path')
 const mongoose = require('mongoose')
+const ejsMate = require('ejs-mate')
 const Campground = require('./models/campgroud')
 
 const methodOverride = require('method-override')
@@ -20,6 +21,7 @@ const port = 8000
 // --------------------------------
 app.use(express.urlencoded({extended: true}))
 app.use(methodOverride('_method'))
+app.engine('ejs',ejsMate)
 app.set('views',path.join(__dirname,'views'))
 app.set('view engine','ejs')
 // --------------------------------
@@ -34,16 +36,18 @@ app.get('/campground', async (req,res)=>{
     const campgrounds = await Campground.find({})
     res.render('campgrounds/index',{campgrounds})
 })
+
 // --- new campground ---
 app.get('/campground/new', async (req,res)=>{
     res.render('campgrounds/new')
 })
 // --- new campground ---
 app.post('/campground', async (req,res)=>{
-    const campground = new Campground(req.body.campground)
-    await campground.save()
-    res.redirect('campground')
+    const campgrounds = new Campground(req.body.campground)
+    await campgrounds.save()
+    res.render('campgrounds/show',{campgrounds})
 })
+
 // --- edit campground ---
 app.get('/campground/:id/edit', async (req,res)=>{
     const {id} = req.params
