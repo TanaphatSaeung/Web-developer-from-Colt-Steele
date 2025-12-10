@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-
+const AppError = require('./appError')
 // --- morgan middleware ---
 const morgan = require('morgan')
 app.use(morgan('tiny'))
@@ -20,13 +20,18 @@ const verifyPassword = (req,res,next) => {
     if ( password === 'Gus' ){
         next()
     }
-    res.send('You need a password!!')
+    throw new AppError('Password required!',401)
 }
 // -------------------------
 
 app.get('/',(req,res)=>{
     res.send('Home!')
 })
+
+app.get('/error',(req,res)=>{
+    throw new Error('Alright This is your Error!!')
+})
+
 app.get('/dogs',(req,res)=>{
     res.send('Woof!')
 })
@@ -35,9 +40,20 @@ app.get('/secret',verifyPassword, (req,res)=>{
     res.send('Nothing secret in this world!')
 })
 
+// --- admin ---
+app.get('/admin', (req,res)=>{
+    throw new AppError("You're not an admin!!",403)
+})
+
 // last 
 app.use((req,res)=>{
     res.status(404).send('NOT FOUND!')
+})
+
+// --- Error Handler ---
+app.use((err,req,res,next)=>{
+    const {status = 500, message = 'Something went Wrong'} = err
+    res.status(status).send(message)
 })
 
 app.listen('9000',()=>{
