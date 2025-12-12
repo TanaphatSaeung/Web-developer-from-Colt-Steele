@@ -24,7 +24,6 @@ const User = mongoose.model('User',userSchema )
 const Tweet = mongoose.model('Tweet',tweetSchema )
 
 const makeTweet = async() =>{
-    // const user = new User({ username: 'checkenfan99', age: 61})
     const user = await User.findOne({username: 'checkenfan99'})
     const tweet2 = new Tweet({ text:'bock bock bock my chickens make noises', likes: 1289})
     tweet2.user = user
