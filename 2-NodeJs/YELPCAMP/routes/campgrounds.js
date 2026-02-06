@@ -42,7 +42,12 @@ router.post('/', validateCampgroundSchema,catchAsync(async (req,res,next)=>{
 router.get('/:id/edit', catchAsync(async (req,res)=>{
     const {id} = req.params
     const campground = await Campground.findById(id)
-    res.render('campgrounds/edit',{campground})
+    if (!campground) {
+        req.flash('error', `Cannot find that campground`);
+        res.redirect('/campground')
+    } else {
+        res.render('campgrounds/edit',{campground})
+    }
 }))
 
 // --- edit campground ---
@@ -50,6 +55,7 @@ router.put('/:id', validateCampgroundSchema,catchAsync(async (req,res)=>{
     const { id } = req.params
     const { title, location } = req.body.campground
     const campground = await Campground.findByIdAndUpdate(id,{title:title,location:location},{runValidators: true, new: true})
+    req.flash('success', `Successfully updated this location : ${title}`);
     res.redirect(`/campground/${campground._id}`)
 }))
 
@@ -57,13 +63,19 @@ router.put('/:id', validateCampgroundSchema,catchAsync(async (req,res)=>{
 router.delete('/:id', catchAsync(async (req,res)=>{
     const { id } = req.params
     await Campground.findByIdAndDelete(id)
+    req.flash('success', `Deleted this ID: '${id}' Successfully!`);
     res.redirect(`/campground`)
 }))
 // --- inquiry detail ---
 router.get('/:id', async (req,res)=>{
     const {id} = req.params
     const campgrounds = await Campground.findById(id).populate('reviews')
-    res.render('campgrounds/show',{campgrounds,})
+    if (!campgrounds) {
+        req.flash('error', `Cannot find that campground`);
+        res.redirect('/campground')
+    } else {
+        res.render('campgrounds/show',{campgrounds,})
+    }
 })
 
 module.exports = router

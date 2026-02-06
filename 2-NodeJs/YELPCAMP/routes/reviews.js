@@ -22,12 +22,11 @@ const validateReviewSchema = (req,res,next) => {
 // --- create review rating and comment ---
 router.post('/', validateReviewSchema, catchAsync(async (req,res)=>{
     const campground = await Campground.findById(req.params.id)
-    console.log(campground);
-    
     const review = new Review(req.body.reviews)
     campground.reviews.push(review)
     await review.save()
     await campground.save()
+    req.flash('success', `Created new review!`);
     res.redirect(`/campground/${campground._id}`)
 }))
 
