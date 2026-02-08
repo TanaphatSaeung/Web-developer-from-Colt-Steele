@@ -6,9 +6,13 @@ const mongoose = require('mongoose')
 const ejsMate = require('ejs-mate')
 const ExpressError = require('./utils/ExpressError')
 const methodOverride = require('method-override')
+const passport = require('passport')
+const localStrategy = require('passport-local')
+const User = require('./models/users')
 // --- router ---
-const campgrounds = require('./routes/campgrounds')
-const reviews = require('./routes/reviews')
+const campgroundRoutes = require('./routes/campgrounds')
+const reviewRoutes = require('./routes/reviews')
+const userRoutes = require('./routes/users')
 
 // --------------------------------
 mongoose.connect('mongodb://localhost:27017/yelp-camp')
@@ -44,6 +48,15 @@ const sessionConfig = {
 app.use(session(sessionConfig))
 app.use(flash())
 
+// --- passport ---
+app.use(passport.initialize())
+app.use(passport.session())
+passport.use(new localStrategy(User.authenticate()))
+
+passport.serializeUser(User.serializeUser()) // how to serialize a user, how to store a user in a session
+passport.deserializeUser(User.deserializeUser()) // how to delete a user in a session
+// these above came from 'PassportLocalMongoose' plugin
+
 // --- midleware flash ---
 app.use((req,res,next)=>{
     res.locals.success = req.flash('success')
@@ -51,12 +64,20 @@ app.use((req,res,next)=>{
     next()
 })
 
+// app.get('/fakeUser', async(req,res)=>{
+//     const user = new User({email: 'gusty@gmail.com', username: 'gusty'})
+//     const newUser = await User.register(user, 'bunny') // this will provide a hash and salt for us, it's not using bcrypt. it's Pbkdf2
+//     res.send(newUser)
+// })
+
 // --------------------------------
 // --- Router ---
 // --- campground ---
-app.use('/campground', campgrounds)
+app.use('/campground', campgroundRoutes)
 // --- review ---
-app.use('/campground/:id/reviews', reviews)
+app.use('/campground/:id/reviews', reviewRoutes)
+// --- review ---
+app.use('/', userRoutes)
 
 // --- home ---
 app.get('/',(req,res)=>{
