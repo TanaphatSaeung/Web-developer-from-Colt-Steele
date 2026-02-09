@@ -67,7 +67,7 @@ router.delete('/:id', isLoggedIn,catchAsync(async (req,res)=>{
     res.redirect(`/campground`)
 }))
 // --- inquiry detail ---
-router.get('/:id', isLoggedIn,async (req,res)=>{
+router.get('/:id', async (req,res)=>{
     const {id} = req.params
     const campgrounds = await Campground.findById(id).populate('reviews')
     if (!campgrounds) {
