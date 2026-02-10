@@ -2,12 +2,34 @@
 <link rel="stylesheet" href="/stylesheets/star.css">
 <div class="row mb-3">
   <div class="col-6">
-    <div class="card mb-3" style="width: 38vw">
-      <img
-        src="<%= campgrounds.image %>"
-        class="card-img-top"
-        alt="<%= campgrounds._id %>"
-      />
+    <div class="card mb-3" style="width: 38vw">    
+      <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <% if (campgrounds.images.length > 1) { %>
+            <% campgrounds.images.forEach((img,i) => { %>
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="<%= i %>" class="<%= i === 0? 'active':'' %>" <%= i === 0 ? 'aria-current="true"' : '' %> aria-label="Slide <%= i+1%>"></button>
+            <% }) %>
+          <% } %>
+        </div>
+        <div class="carousel-inner">
+          <% campgrounds.images.forEach((img,i) => { %>
+            <div class="carousel-item <%= i === 0 ? 'active' : '' %>">
+              <img src="<%= img.url %>" class="d-block w-100" alt="<%= img._id %>">
+            </div>
+          <% }) %>
+        </div>
+        <% if (campgrounds.images.length > 1) { %>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+        <% } %>
+      </div>
+      
       <div class="card-body">
         <h5 class="card-title"><%= campgrounds.title %></h5>
         <p class="card-text"><%= campgrounds.description %></p>
