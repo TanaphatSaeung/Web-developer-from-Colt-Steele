@@ -16,7 +16,7 @@ router.get('/new', isLoggedIn,campgroundControllers.create)
 
 router.route('/:id')
     .get(campgroundControllers.detail) // --- inquiry detail ---
-    .put(isLoggedIn,isAuthor,validateCampgroundSchema,catchAsync(campgroundControllers.editPost)) // --- edit campground ---
+    .put(isLoggedIn,isAuthor,upload.array("image"),validateCampgroundSchema,catchAsync(campgroundControllers.editPost)) // --- edit campground ---
     .delete(isLoggedIn, isAuthor,catchAsync(campgroundControllers.delete)) // --- delete campground ---
 
 // --- edit campground ---
