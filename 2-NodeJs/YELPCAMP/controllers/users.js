@@ -4,7 +4,7 @@ module.exports.registerController = {
     register: (req,res) => {
         res.render('users/register')
     },
-    registerPost: async (req,res) => {
+    registerPost: async (req,res,next) => {
         try {
             const { username, password, email } = req.body
             const user = new User({ username, email})
@@ -16,7 +16,7 @@ module.exports.registerController = {
             })
         } catch (err) {
             req.flash('error', err.message)
-            res.redirect('register')
+            res.redirect('/register')
             console.log(err);
             
         }
